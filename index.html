@@ -20,8 +20,6 @@
       --primary: #2563eb;
       --primary2: #7c3aed;
       --danger: #ef4444;
-      --soft: #eef2ff;
-      --success: #22c55e;
     }
 
     body {
@@ -459,7 +457,7 @@
       <div class="badge-row">
         <div class="badge">Логин и пароль</div>
         <div class="badge">Проверка книг</div>
-        <div class="badge">Редактирование</div>
+        <div class="badge">Цель меняется</div>
         <div class="badge">Топ-10 рейтинг</div>
       </div>
     </section>
@@ -583,11 +581,9 @@
   </div>
 
   <script>
-    // Новые ключи, чтобы старые аккаунты и старые книги не подтянулись
-    const USERS_KEY = "reading_users_v2_clean";
-    const CURRENT_USER_KEY = "reading_current_user_v2_clean";
-    const GOAL_KEY = "reading_goal_v2_clean";
-
+    const USERS_KEY = "reading_users_v3_clean";
+    const CURRENT_USER_KEY = "reading_current_user_v3_clean";
+    const GOAL_KEY = "reading_goal_v3_clean";
     const PLACEHOLDER_COVER = "https://via.placeholder.com/90x128?text=No+Cover";
 
     function getUsers() {
@@ -893,43 +889,6 @@
       renderApp();
     }
 
-    function editBook(bookId) {
-      const currentUser = getCurrentUser();
-      if (!currentUser) return;
-
-      const users = getUsers();
-      const userIndex = users.findIndex(user => user.id === currentUser.id);
-      if (userIndex === -1) return;
-
-      const book = users[userIndex].books.find(b => b.id === bookId);
-      if (!book) return;
-
-      const newTitle = prompt("Новое название книги:", book.title);
-      if (newTitle === null) return;
-
-      const newAuthor = prompt("Новый автор:", book.author);
-      if (newAuthor === null) return;
-
-      const newPagesText = prompt("Новое количество страниц:", book.pages);
-      if (newPagesText === null) return;
-
-      const newPages = Number(newPagesText);
-
-      if (!newTitle.trim() || !newAuthor.trim() || !newPages || newPages <= 0 || newPages > 3000) {
-        alert("Проверь данные книги.");
-        return;
-      }
-
-      book.title = newTitle.trim();
-      book.author = newAuthor.trim();
-      book.pages = newPages;
-
-      saveUsers(users);
-      saveCurrentUser(users[userIndex]);
-
-      renderApp();
-    }
-
     function renderBooks(user) {
       const bookList = document.getElementById("bookList");
       const searchValue = document.getElementById("searchInput").value.trim().toLowerCase();
@@ -957,17 +916,13 @@
               <div class="small">Автор: ${escapeHtml(book.author || "Не указан")}</div>
               <div class="small">Страниц: ${book.pages || 0}</div>
               <div class="book-actions">
-                <button class="ghost-btn mini-btn">Изменить</button>
                 <button class="danger-btn mini-btn">Удалить</button>
               </div>
             </div>
           </div>
         `;
 
-        const buttons = item.querySelectorAll("button");
-        buttons[0].addEventListener("click", () => editBook(book.id));
-        buttons[1].addEventListener("click", () => deleteBook(book.id));
-
+        item.querySelector("button").addEventListener("click", () => deleteBook(book.id));
         bookList.appendChild(item);
       });
     }
