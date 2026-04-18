@@ -74,16 +74,20 @@
       grid-template-columns: 1fr 1fr;
       gap: 20px;
       margin-top: 20px;
+      align-items: start;
     }
 
     .card {
+      width: 100%;
       background: var(--card);
       border-radius: 24px;
       padding: 22px;
       box-shadow: 0 20px 50px rgba(0,0,0,.18);
     }
 
-    .full { grid-column: 1 / -1; }
+    .full {
+      grid-column: 1 / -1;
+    }
 
     h2, h3 {
       margin-top: 0;
@@ -157,7 +161,9 @@
       margin-bottom: 16px;
     }
 
-    .tab-btn { margin-top: 0; }
+    .tab-btn {
+      margin-top: 0;
+    }
 
     .active-tab {
       background: linear-gradient(135deg, var(--primary), var(--primary2));
@@ -171,6 +177,7 @@
       margin-bottom: 12px;
       font-weight: bold;
       color: #1e3a8a;
+      line-height: 1.5;
     }
 
     .stats {
@@ -270,6 +277,7 @@
       color: var(--muted);
       font-size: 14px;
       margin: 4px 0;
+      line-height: 1.5;
     }
 
     .empty {
@@ -350,21 +358,60 @@
       border-radius: 14px;
       margin-bottom: 12px;
       font-size: 14px;
+      line-height: 1.5;
     }
 
     @media (max-width: 900px) {
-      .grid { grid-template-columns: 1fr; }
-      .stats { grid-template-columns: 1fr 1fr; }
-      .hero h1 { font-size: 32px; }
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
     }
 
     @media (max-width: 600px) {
-      .stats { grid-template-columns: 1fr; }
-      .tabs { flex-direction: column; }
-      .book-row, .search-row { grid-template-columns: 1fr; }
-      .book-cover, .search-cover { width: 120px; height: 170px; }
-      .goal-controls, .challenge-create-grid, .challenge-join-grid { flex-direction: column; }
-      .goal-controls button, .challenge-create-grid button, .challenge-join-grid button { width: 100%; }
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .tabs {
+        flex-direction: column;
+      }
+
+      .book-row, .search-row {
+        grid-template-columns: 1fr;
+      }
+
+      .book-cover, .search-cover {
+        width: 120px;
+        height: 170px;
+      }
+
+      .goal-controls, .challenge-create-grid, .challenge-join-grid {
+        flex-direction: column;
+      }
+
+      .goal-controls button, .challenge-create-grid button, .challenge-join-grid button {
+        width: 100%;
+      }
+
+      .wrapper {
+        padding: 14px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
     }
   </style>
 </head>
@@ -418,7 +465,7 @@
         </div>
       </div>
 
-      <div class="card hidden" id="bookCard">
+      <div class="card hidden full" id="bookCard">
         <h2>Добавить книгу</h2>
         <div class="welcome" id="welcomeText"></div>
 
@@ -426,11 +473,11 @@
           Книга ищется через Google Books API. Автор и количество страниц подтягиваются автоматически.
         </div>
 
-        <label for="searchBookInput">Название книги</label>
+        <label for="searchBookInput">Название книги или автор</label>
         <input
           type="text"
           id="searchBookInput"
-          placeholder="Например: Гарри Поттер"
+          placeholder="Например: Гарри Поттер или Пушкин"
           onkeydown="handleBookSearchKey(event)"
         />
 
@@ -562,15 +609,14 @@
       arrayRemove
     } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-firestore.js";
 
-    
+    // ОБЯЗАТЕЛЬНО ВСТАВЬ СВОЙ НАСТОЯЩИЙ firebaseConfig
     const firebaseConfig = {
-      apiKey: "AIzaSyA5iKSOqlOtUldIk-AirBy10tbEpuNL42Y",
-      authDomain: "void-8c7e2.firebaseapp.com",
-      projectId: "void-8c7e2",
-      storageBucket: "void-8c7e2.firebasestorage.app",
-      messagingSenderId: "1013361511979",
-      appId: "1:1013361511979:web:cbd63c78ab5cc49643646e",
-      measurementId: "G-S5P9828SQ0"
+      apiKey: "PASTE_HERE",
+      authDomain: "PASTE_HERE",
+      projectId: "PASTE_HERE",
+      storageBucket: "PASTE_HERE",
+      messagingSenderId: "PASTE_HERE",
+      appId: "PASTE_HERE"
     };
 
     const app = initializeApp(firebaseConfig);
@@ -622,6 +668,11 @@
           return;
         }
 
+        if (password.length < 6) {
+          alert("Пароль должен быть минимум 6 символов.");
+          return;
+        }
+
         if (!className) className = "Не указано";
 
         const usersRef = collection(db, "users");
@@ -649,8 +700,19 @@
         document.getElementById("registerPassword").value = "";
         document.getElementById("registerLogin").value = "";
         document.getElementById("registerClass").value = "";
+
+        alert("Аккаунт создан. Теперь можешь войти.");
+        switchTab("login");
       } catch (error) {
-        alert("Ошибка регистрации: " + error.message);
+        if (error.code === "auth/email-already-in-use") {
+          alert("Этот email уже используется.");
+        } else if (error.code === "auth/invalid-email") {
+          alert("Некорректный email.");
+        } else if (error.code === "auth/weak-password") {
+          alert("Слишком слабый пароль. Минимум 6 символов.");
+        } else {
+          alert("Ошибка регистрации: " + error.message);
+        }
       }
     }
     window.registerUser = registerUser;
@@ -670,7 +732,17 @@
         document.getElementById("loginEmail").value = "";
         document.getElementById("loginPassword").value = "";
       } catch (error) {
-        alert("Ошибка входа: " + error.message);
+        if (error.code === "auth/invalid-credential") {
+          alert("Неверный email или пароль. Если аккаунт ещё не создан в Firebase, сначала зарегистрируйся.");
+        } else if (error.code === "auth/user-not-found") {
+          alert("Такого пользователя нет. Сначала зарегистрируйся.");
+        } else if (error.code === "auth/wrong-password") {
+          alert("Неверный пароль.");
+        } else if (error.code === "auth/invalid-email") {
+          alert("Некорректный email.");
+        } else {
+          alert("Ошибка входа: " + error.message);
+        }
       }
     }
     window.loginUser = loginUser;
@@ -725,24 +797,32 @@
 
       searchResults.innerHTML = '<div class="loader">Поиск книг...</div>';
 
-      try {
-        const smartQuery = "intitle:" + queryText;
-        const url =
-          "https://www.googleapis.com/books/v1/volumes?q=" +
-          encodeURIComponent(smartQuery) +
-          "&maxResults=8&printType=books";
+      const tryUrls = [
+        "https://www.googleapis.com/books/v1/volumes?q=" + encodeURIComponent(queryText) + "&maxResults=10&printType=books",
+        "https://www.googleapis.com/books/v1/volumes?q=" + encodeURIComponent("intitle:" + queryText) + "&maxResults=10&printType=books",
+        "https://www.googleapis.com/books/v1/volumes?q=" + encodeURIComponent(queryText) + "&langRestrict=ru&maxResults=10&printType=books"
+      ];
 
-        const response = await fetch(url);
-        const data = await response.json();
+      try {
+        let items = [];
+
+        for (const url of tryUrls) {
+          const response = await fetch(url);
+          const data = await response.json();
+          if (data.items && data.items.length) {
+            items = data.items;
+            break;
+          }
+        }
 
         searchResults.innerHTML = "";
 
-        if (!data.items || data.items.length === 0) {
-          searchResults.innerHTML = '<div class="empty">Ничего не найдено.</div>';
+        if (!items.length) {
+          searchResults.innerHTML = '<div class="empty">Ничего не найдено. Попробуй другое название или автора.</div>';
           return;
         }
 
-        data.items.forEach(book => {
+        items.forEach(book => {
           const info = book.volumeInfo || {};
           const title = info.title || "Без названия";
           const author = info.authors ? info.authors.join(", ") : "Автор не указан";
@@ -773,7 +853,7 @@
           searchResults.appendChild(item);
         });
       } catch (error) {
-        searchResults.innerHTML = '<div class="empty">Ошибка при поиске книги.</div>';
+        searchResults.innerHTML = '<div class="empty">Ошибка при поиске книги. Проверь интернет или попробуй позже.</div>';
       }
     }
     window.searchBooks = searchBooks;
