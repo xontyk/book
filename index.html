@@ -1364,4 +1364,25 @@
     renderApp();
   </script>
 </body>
+  <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-app.js";
+  import { getAuth } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-auth.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+  apiKey: "AIzaSyA5iKSOqlOtUldIk-AirBy10tbEpuNL42Y",
+  authDomain: "void-8c7e2.firebaseapp.com",
+  projectId: "void-8c7e2",
+  storageBucket: "void-8c7e2.firebasestorage.app",
+  messagingSenderId: "1013361511979",
+  appId: "1:1013361511979:web:cbd63c78ab5cc49643646e",
+  measurementId: "G-S5P9828SQ0"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  console.log("Firebase подключен ✅");
+</script>
 </html>
