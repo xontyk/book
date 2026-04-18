@@ -19,7 +19,6 @@
       --primary2: #7c3aed;
       --danger: #ef4444;
       --success: #16a34a;
-      --soft: #eef2ff;
     }
 
     body {
@@ -40,7 +39,6 @@
       text-align: center;
       color: white;
       padding: 24px 0 12px;
-      animation: fadeUp .6s ease;
     }
 
     .hero h1 {
@@ -83,19 +81,12 @@
       border-radius: 24px;
       padding: 22px;
       box-shadow: 0 20px 50px rgba(0,0,0,.18);
-      animation: fadeUp .45s ease;
     }
 
     .full { grid-column: 1 / -1; }
 
-    h2 {
+    h2, h3 {
       margin-top: 0;
-      margin-bottom: 14px;
-      font-size: 24px;
-    }
-
-    h3 {
-      margin: 0 0 10px;
     }
 
     label {
@@ -112,11 +103,6 @@
       border: 1px solid #cbd5e1;
       font-size: 15px;
       font-family: inherit;
-    }
-
-    textarea {
-      min-height: 180px;
-      resize: vertical;
     }
 
     input:focus, textarea:focus, select:focus {
@@ -215,26 +201,6 @@
       color: #1d4ed8;
     }
 
-    .goal-controls, .challenge-create-grid, .challenge-join-grid {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items: end;
-    }
-
-    .goal-input-wrap, .challenge-field {
-      flex: 1;
-      min-width: 180px;
-    }
-
-    .goal-controls button,
-    .challenge-create-grid button,
-    .challenge-join-grid button {
-      width: auto;
-      min-width: 170px;
-      margin-top: 0;
-    }
-
     .progress-bar-wrap {
       margin-top: 14px;
       background: #e5e7eb;
@@ -248,6 +214,24 @@
       width: 0%;
       background: linear-gradient(90deg, #22c55e, #3b82f6, #7c3aed);
       transition: width .5s ease;
+    }
+
+    .goal-controls, .challenge-create-grid, .challenge-join-grid {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: end;
+    }
+
+    .goal-input-wrap, .challenge-field {
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .goal-controls button, .challenge-create-grid button, .challenge-join-grid button {
+      width: auto;
+      min-width: 170px;
+      margin-top: 0;
     }
 
     .muted {
@@ -280,7 +264,6 @@
       border: 1px solid var(--line);
       border-radius: 18px;
       padding: 15px;
-      animation: fadeIn .35s ease;
     }
 
     .small {
@@ -357,7 +340,6 @@
       text-align: center;
       color: #1d4ed8;
       font-weight: bold;
-      animation: pulse 1s infinite;
     }
 
     .top-note {
@@ -368,55 +350,6 @@
       border-radius: 14px;
       margin-bottom: 12px;
       font-size: 14px;
-    }
-
-    .reader-box {
-      background: #fafaf9;
-      border: 1px solid #e7e5e4;
-      border-radius: 16px;
-      padding: 18px;
-      line-height: 1.7;
-      white-space: pre-wrap;
-      max-height: 420px;
-      overflow-y: auto;
-      font-size: 17px;
-    }
-
-    .reader-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 12px;
-    }
-
-    .reader-actions button {
-      width: auto;
-      min-width: 160px;
-      margin-top: 0;
-    }
-
-    .footer {
-      text-align: center;
-      color: #e5e7eb;
-      margin-top: 18px;
-      font-size: 14px;
-      padding-bottom: 10px;
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes pulse {
-      0% { opacity: .5; }
-      50% { opacity: 1; }
-      100% { opacity: .5; }
     }
 
     @media (max-width: 900px) {
@@ -441,10 +374,10 @@
       <h1>📚 Reading Challenge</h1>
       <p>Соревнование по количеству прочитанных книг и страниц</p>
       <div class="badge-row">
+        <div class="badge">Firebase</div>
+        <div class="badge">Общий рейтинг</div>
         <div class="badge">Турниры</div>
-        <div class="badge">Открытые и закрытые</div>
-        <div class="badge">Поиск книг</div>
-        <div class="badge">Читалка</div>
+        <div class="badge">Все устройства</div>
       </div>
     </section>
 
@@ -458,11 +391,14 @@
         </div>
 
         <div id="registerTab">
-          <label for="registerLogin">Логин</label>
-          <input type="text" id="registerLogin" placeholder="Придумай логин" />
+          <label for="registerEmail">Email</label>
+          <input type="email" id="registerEmail" placeholder="Введите email" />
 
           <label for="registerPassword">Пароль</label>
           <input type="password" id="registerPassword" placeholder="Придумай пароль" />
+
+          <label for="registerLogin">Логин</label>
+          <input type="text" id="registerLogin" placeholder="Придумай логин" />
 
           <label for="registerClass">В каком классе вы учитесь?</label>
           <input type="text" id="registerClass" placeholder="Например: 8А" />
@@ -472,8 +408,8 @@
         </div>
 
         <div id="loginTab" class="hidden">
-          <label for="loginLogin">Логин</label>
-          <input type="text" id="loginLogin" placeholder="Введите логин" />
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" placeholder="Введите email" />
 
           <label for="loginPassword">Пароль</label>
           <input type="password" id="loginPassword" placeholder="Введите пароль" />
@@ -502,21 +438,16 @@
         <div id="searchResults" class="search-grid"></div>
 
         <button class="ghost-btn" onclick="logoutUser()">Выйти из аккаунта</button>
-        <button class="danger-btn" onclick="resetAllData()">Сбросить все данные</button>
       </div>
 
       <div class="card hidden full" id="challengeCard">
         <h2>Турниры / Challenge</h2>
 
-        <div class="top-note">
-          Здесь можно создать открытый или закрытый турнир, присоединиться к нему и смотреть рейтинг внутри него.
-        </div>
-
         <h3>Создать турнир</h3>
         <div class="challenge-create-grid">
           <div class="challenge-field">
             <label for="challengeName">Название турнира</label>
-            <input type="text" id="challengeName" placeholder="Например: 8А читает весной" />
+            <input type="text" id="challengeName" placeholder="Например: 8А читает" />
           </div>
 
           <div class="challenge-field">
@@ -591,107 +522,68 @@
             type="text"
             id="searchInput"
             placeholder="Поиск по названию или автору"
-            oninput="renderApp()"
+            oninput="renderBooksOnly()"
           />
         </div>
         <div id="bookList" class="list"></div>
-      </div>
-
-      <div class="card hidden full" id="readerCard">
-        <h2>Читалка</h2>
-        <div class="top-note">
-          Сюда можно вставить свой текст, краткий отрывок или книгу из общественного достояния и читать прямо на сайте.
-        </div>
-
-        <label for="readerTitleInput">Название текста</label>
-        <input type="text" id="readerTitleInput" placeholder="Например: Мой рассказ" />
-
-        <label for="readerTextInput">Текст для чтения</label>
-        <textarea id="readerTextInput" placeholder="Вставь сюда свой текст для чтения..."></textarea>
-
-        <div class="reader-actions">
-          <button class="primary-btn" onclick="saveReaderText()">Сохранить текст</button>
-          <button class="ghost-btn" onclick="loadDemoReaderText()">Загрузить демо-текст</button>
-          <button class="danger-btn" onclick="clearReaderText()">Очистить</button>
-        </div>
-
-        <div style="margin-top:18px;">
-          <h3 id="readerDisplayTitle">Текст для чтения</h3>
-          <div id="readerDisplay" class="reader-box">Пока текста нет.</div>
-        </div>
       </div>
 
       <div class="card full">
         <h2>🏆 Топ-10 рейтинг</h2>
         <div id="ratingTitle" class="small" style="margin-bottom:10px;"></div>
         <div id="ratingList" class="list"></div>
-        <div class="muted">
-          В этой версии данные хранятся в localStorage, поэтому сайт лучше показывать на одном устройстве.
-        </div>
       </div>
     </section>
-
-    <div class="footer"></div>
   </div>
 
-  <script>
-    const USERS_KEY = "reading_users_v4_challenges";
-    const CURRENT_USER_KEY = "reading_current_user_v4_challenges";
-    const GOAL_KEY = "reading_goal_v4_challenges";
-    const CHALLENGES_KEY = "reading_challenges_v4_challenges";
-    const ACTIVE_CHALLENGE_KEY = "reading_active_challenge_v4_challenges";
-    const READER_KEY = "reading_reader_text_v4_challenges";
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-app.js";
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      signOut,
+      onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-auth.js";
+    import {
+      getFirestore,
+      doc,
+      setDoc,
+      getDoc,
+      addDoc,
+      deleteDoc,
+      collection,
+      query,
+      where,
+      getDocs,
+      onSnapshot,
+      updateDoc,
+      arrayUnion,
+      arrayRemove
+    } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-firestore.js";
+
+    
+    const firebaseConfig = {
+      apiKey: "AIzaSyA5iKSOqlOtUldIk-AirBy10tbEpuNL42Y",
+      authDomain: "void-8c7e2.firebaseapp.com",
+      projectId: "void-8c7e2",
+      storageBucket: "void-8c7e2.firebasestorage.app",
+      messagingSenderId: "1013361511979",
+      appId: "1:1013361511979:web:cbd63c78ab5cc49643646e",
+      measurementId: "G-S5P9828SQ0"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
 
     const PLACEHOLDER_COVER = "https://via.placeholder.com/90x128?text=No+Cover";
 
-    function getUsers() {
-      return JSON.parse(localStorage.getItem(USERS_KEY)) || [];
-    }
-
-    function saveUsers(users) {
-      localStorage.setItem(USERS_KEY, JSON.stringify(users));
-    }
-
-    function getCurrentUser() {
-      return JSON.parse(localStorage.getItem(CURRENT_USER_KEY)) || null;
-    }
-
-    function saveCurrentUser(user) {
-      localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user));
-    }
-
-    function getGoal() {
-      const goal = Number(localStorage.getItem(GOAL_KEY));
-      return goal > 0 ? goal : 1000;
-    }
-
-    function saveGoal(goal) {
-      localStorage.setItem(GOAL_KEY, String(goal));
-    }
-
-    function getChallenges() {
-      return JSON.parse(localStorage.getItem(CHALLENGES_KEY)) || [];
-    }
-
-    function saveChallenges(challenges) {
-      localStorage.setItem(CHALLENGES_KEY, JSON.stringify(challenges));
-    }
-
-    function getActiveChallengeId() {
-      return localStorage.getItem(ACTIVE_CHALLENGE_KEY) || "";
-    }
-
-    function saveActiveChallengeId(id) {
-      localStorage.setItem(ACTIVE_CHALLENGE_KEY, id);
-    }
-
-    function getReaderData() {
-      return JSON.parse(localStorage.getItem(READER_KEY)) || { title: "", text: "" };
-    }
-
-    function saveReaderData(data) {
-      localStorage.setItem(READER_KEY, JSON.stringify(data));
-    }
+    let currentProfile = null;
+    let usersCache = [];
+    let challengesCache = [];
+    let booksCache = [];
+    let activeChallengeId = "";
 
     function switchTab(tab) {
       const registerTab = document.getElementById("registerTab");
@@ -711,131 +603,103 @@
         loginBtn.className = "tab-btn active-tab";
       }
     }
+    window.switchTab = switchTab;
 
     function skipClass() {
       document.getElementById("registerClass").value = "Не учится";
     }
+    window.skipClass = skipClass;
 
-    function registerUser() {
-      const login = document.getElementById("registerLogin").value.trim();
-      const password = document.getElementById("registerPassword").value.trim();
-      let className = document.getElementById("registerClass").value.trim();
+    async function registerUser() {
+      try {
+        const email = document.getElementById("registerEmail").value.trim();
+        const password = document.getElementById("registerPassword").value.trim();
+        const login = document.getElementById("registerLogin").value.trim();
+        let className = document.getElementById("registerClass").value.trim();
 
-      if (!login || !password) {
-        alert("Заполни логин и пароль.");
-        return;
+        if (!email || !password || !login) {
+          alert("Заполни email, пароль и логин.");
+          return;
+        }
+
+        if (!className) className = "Не указано";
+
+        const usersRef = collection(db, "users");
+        const q = query(usersRef, where("loginLower", "==", login.toLowerCase()));
+        const snap = await getDocs(q);
+
+        if (!snap.empty) {
+          alert("Такой логин уже существует.");
+          return;
+        }
+
+        const cred = await createUserWithEmailAndPassword(auth, email, password);
+
+        await setDoc(doc(db, "users", cred.user.uid), {
+          uid: cred.user.uid,
+          email,
+          login,
+          loginLower: login.toLowerCase(),
+          className,
+          goal: 1000,
+          createdAt: Date.now()
+        });
+
+        document.getElementById("registerEmail").value = "";
+        document.getElementById("registerPassword").value = "";
+        document.getElementById("registerLogin").value = "";
+        document.getElementById("registerClass").value = "";
+      } catch (error) {
+        alert("Ошибка регистрации: " + error.message);
       }
+    }
+    window.registerUser = registerUser;
 
-      if (!className) className = "Не указано";
+    async function loginUser() {
+      try {
+        const email = document.getElementById("loginEmail").value.trim();
+        const password = document.getElementById("loginPassword").value.trim();
 
-      const users = getUsers();
-      const loginExists = users.some(
-        user => user.login.toLowerCase() === login.toLowerCase()
-      );
+        if (!email || !password) {
+          alert("Введи email и пароль.");
+          return;
+        }
 
-      if (loginExists) {
-        alert("Такой логин уже существует.");
-        return;
+        await signInWithEmailAndPassword(auth, email, password);
+
+        document.getElementById("loginEmail").value = "";
+        document.getElementById("loginPassword").value = "";
+      } catch (error) {
+        alert("Ошибка входа: " + error.message);
       }
-
-      const newUser = {
-        id: Date.now(),
-        login,
-        password,
-        className,
-        books: []
-      };
-
-      users.push(newUser);
-      saveUsers(users);
-      saveCurrentUser(newUser);
-
-      document.getElementById("registerLogin").value = "";
-      document.getElementById("registerPassword").value = "";
-      document.getElementById("registerClass").value = "";
-
-      renderApp();
     }
+    window.loginUser = loginUser;
 
-    function loginUser() {
-      const login = document.getElementById("loginLogin").value.trim();
-      const password = document.getElementById("loginPassword").value.trim();
-
-      if (!login || !password) {
-        alert("Введи логин и пароль.");
-        return;
-      }
-
-      const users = getUsers();
-      const foundUser = users.find(
-        user => user.login === login && user.password === password
-      );
-
-      if (!foundUser) {
-        alert("Неверный логин или пароль.");
-        return;
-      }
-
-      saveCurrentUser(foundUser);
-
-      document.getElementById("loginLogin").value = "";
-      document.getElementById("loginPassword").value = "";
-
-      renderApp();
+    async function logoutUser() {
+      await signOut(auth);
     }
+    window.logoutUser = logoutUser;
 
-    function logoutUser() {
-      localStorage.removeItem(CURRENT_USER_KEY);
-      renderApp();
-    }
+    async function updateGoal() {
+      if (!currentProfile) return;
 
-    function resetAllData() {
-      const ok = confirm("Точно удалить всех пользователей, турниры, книги и тексты?");
-      if (!ok) return;
-
-      localStorage.removeItem(USERS_KEY);
-      localStorage.removeItem(CURRENT_USER_KEY);
-      localStorage.removeItem(GOAL_KEY);
-      localStorage.removeItem(CHALLENGES_KEY);
-      localStorage.removeItem(ACTIVE_CHALLENGE_KEY);
-      localStorage.removeItem(READER_KEY);
-
-      renderApp();
-    }
-
-    function updateGoal() {
       const value = Number(document.getElementById("goalInput").value);
-
       if (!value || value <= 0) {
         alert("Введи корректную цель.");
         return;
       }
 
-      saveGoal(value);
+      await updateDoc(doc(db, "users", currentProfile.uid), { goal: value });
       document.getElementById("goalInput").value = "";
-      renderApp();
     }
+    window.updateGoal = updateGoal;
 
-    function resetGoal() {
-      saveGoal(1000);
+    async function resetGoal() {
+      if (!currentProfile) return;
+      await updateDoc(doc(db, "users", currentProfile.uid), { goal: 1000 });
       document.getElementById("goalInput").value = "";
-      renderApp();
     }
-
-    function getUserStats(user) {
-      const goal = getGoal();
-      const totalBooks = user.books.length;
-      const totalPages = user.books.reduce((sum, book) => sum + Number(book.pages || 0), 0);
-      const avgPages = totalBooks > 0 ? Math.round(totalPages / totalBooks) : 0;
-      const goalPercent = Math.min(Math.round((totalPages / goal) * 100), 100);
-
-      return {
-        totalBooks,
-        totalPages,
-        avgPages,
-        goalPercent
-      };
-    }
+    window.resetGoal = resetGoal;
 
     function getBadge(totalPages) {
       if (totalPages >= 1000) return "🏆 Легенда чтения";
@@ -848,12 +712,13 @@
     function handleBookSearchKey(event) {
       if (event.key === "Enter") searchBooks();
     }
+    window.handleBookSearchKey = handleBookSearchKey;
 
     async function searchBooks() {
-      const query = document.getElementById("searchBookInput").value.trim();
+      const queryText = document.getElementById("searchBookInput").value.trim();
       const searchResults = document.getElementById("searchResults");
 
-      if (!query) {
+      if (!queryText) {
         alert("Введи название книги.");
         return;
       }
@@ -861,7 +726,7 @@
       searchResults.innerHTML = '<div class="loader">Поиск книг...</div>';
 
       try {
-        const smartQuery = "intitle:" + query;
+        const smartQuery = "intitle:" + queryText;
         const url =
           "https://www.googleapis.com/books/v1/volumes?q=" +
           encodeURIComponent(smartQuery) +
@@ -904,73 +769,38 @@
             </div>
           `;
 
-          item.querySelector("button").addEventListener("click", () => {
-            addBookFromApi(safeBook);
-          });
-
+          item.querySelector("button").addEventListener("click", () => addBook(safeBook));
           searchResults.appendChild(item);
         });
       } catch (error) {
-        searchResults.innerHTML = '<div class="empty">Ошибка при поиске книги. Проверь интернет.</div>';
+        searchResults.innerHTML = '<div class="empty">Ошибка при поиске книги.</div>';
       }
     }
+    window.searchBooks = searchBooks;
 
-    function addBookFromApi(bookData) {
-      const currentUser = getCurrentUser();
-      if (!currentUser) {
-        alert("Сначала войди в аккаунт.");
-        return;
-      }
+    async function addBook(bookData) {
+      if (!currentProfile) return;
 
-      const users = getUsers();
-      const userIndex = users.findIndex(user => user.id === currentUser.id);
-
-      if (userIndex === -1) {
-        alert("Пользователь не найден.");
-        return;
-      }
-
-      const newBook = {
-        id: Date.now(),
+      await addDoc(collection(db, "books"), {
+        uid: currentProfile.uid,
+        login: currentProfile.login,
         title: bookData.title,
         author: bookData.author,
         pages: Number(bookData.pages || 0),
-        cover: bookData.cover || PLACEHOLDER_COVER
-      };
-
-      users[userIndex].books.push(newBook);
-
-      saveUsers(users);
-      saveCurrentUser(users[userIndex]);
+        cover: bookData.cover || PLACEHOLDER_COVER,
+        createdAt: Date.now()
+      });
 
       document.getElementById("searchBookInput").value = "";
       document.getElementById("searchResults").innerHTML = "";
-
-      renderApp();
     }
 
-    function deleteBook(bookId) {
-      const currentUser = getCurrentUser();
-      if (!currentUser) return;
-
-      const users = getUsers();
-      const userIndex = users.findIndex(user => user.id === currentUser.id);
-      if (userIndex === -1) return;
-
-      users[userIndex].books = users[userIndex].books.filter(book => book.id !== bookId);
-
-      saveUsers(users);
-      saveCurrentUser(users[userIndex]);
-
-      renderApp();
+    async function deleteBook(bookId) {
+      await deleteDoc(doc(db, "books", bookId));
     }
 
-    function createChallenge() {
-      const currentUser = getCurrentUser();
-      if (!currentUser) {
-        alert("Сначала войди в аккаунт.");
-        return;
-      }
+    async function createChallenge() {
+      if (!currentProfile) return;
 
       const name = document.getElementById("challengeName").value.trim();
       const type = document.getElementById("challengeType").value;
@@ -986,54 +816,40 @@
         return;
       }
 
-      if (type === "open") {
-        code = "";
-      }
+      if (type === "open") code = "";
 
-      const challenges = getChallenges();
-
-      const challenge = {
-        id: "ch_" + Date.now(),
+      const ref = await addDoc(collection(db, "challenges"), {
         name,
         type,
         code,
-        creatorLogin: currentUser.login,
-        members: [currentUser.login]
-      };
+        creatorUid: currentProfile.uid,
+        creatorLogin: currentProfile.login,
+        members: [currentProfile.uid],
+        membersLogins: [currentProfile.login],
+        createdAt: Date.now()
+      });
 
-      challenges.push(challenge);
-      saveChallenges(challenges);
-      saveActiveChallengeId(challenge.id);
-
+      activeChallengeId = ref.id;
       document.getElementById("challengeName").value = "";
       document.getElementById("challengeCode").value = "";
+      renderRating();
+    }
+    window.createChallenge = createChallenge;
 
-      renderApp();
+    async function joinOpenChallenge(challengeId) {
+      if (!currentProfile) return;
+
+      await updateDoc(doc(db, "challenges", challengeId), {
+        members: arrayUnion(currentProfile.uid),
+        membersLogins: arrayUnion(currentProfile.login)
+      });
+
+      activeChallengeId = challengeId;
+      renderRating();
     }
 
-    function joinOpenChallenge(challengeId) {
-      const currentUser = getCurrentUser();
-      if (!currentUser) return;
-
-      const challenges = getChallenges();
-      const challengeIndex = challenges.findIndex(ch => ch.id === challengeId);
-      if (challengeIndex === -1) return;
-
-      if (!challenges[challengeIndex].members.includes(currentUser.login)) {
-        challenges[challengeIndex].members.push(currentUser.login);
-      }
-
-      saveChallenges(challenges);
-      saveActiveChallengeId(challengeId);
-      renderApp();
-    }
-
-    function joinChallengeByCode() {
-      const currentUser = getCurrentUser();
-      if (!currentUser) {
-        alert("Сначала войди в аккаунт.");
-        return;
-      }
+    async function joinChallengeByCode() {
+      if (!currentProfile) return;
 
       const code = document.getElementById("joinChallengeCode").value.trim();
       if (!code) {
@@ -1041,70 +857,114 @@
         return;
       }
 
-      const challenges = getChallenges();
-      const challengeIndex = challenges.findIndex(
-        ch => ch.type === "closed" && ch.code === code
-      );
+      const q = query(collection(db, "challenges"), where("code", "==", code));
+      const snap = await getDocs(q);
 
-      if (challengeIndex === -1) {
+      if (snap.empty) {
         alert("Турнир с таким кодом не найден.");
         return;
       }
 
-      if (!challenges[challengeIndex].members.includes(currentUser.login)) {
-        challenges[challengeIndex].members.push(currentUser.login);
-      }
+      const challengeDoc = snap.docs[0];
 
-      saveChallenges(challenges);
-      saveActiveChallengeId(challenges[challengeIndex].id);
+      await updateDoc(doc(db, "challenges", challengeDoc.id), {
+        members: arrayUnion(currentProfile.uid),
+        membersLogins: arrayUnion(currentProfile.login)
+      });
 
+      activeChallengeId = challengeDoc.id;
       document.getElementById("joinChallengeCode").value = "";
-      renderApp();
+      renderRating();
     }
+    window.joinChallengeByCode = joinChallengeByCode;
 
     function selectChallenge(challengeId) {
-      saveActiveChallengeId(challengeId);
-      renderApp();
+      activeChallengeId = challengeId;
+      renderChallenges();
+      renderRating();
     }
 
-    function leaveChallenge(challengeId) {
-      const currentUser = getCurrentUser();
-      if (!currentUser) return;
+    async function leaveChallenge(challengeId) {
+      if (!currentProfile) return;
 
-      const challenges = getChallenges();
-      const challengeIndex = challenges.findIndex(ch => ch.id === challengeId);
-      if (challengeIndex === -1) return;
+      await updateDoc(doc(db, "challenges", challengeId), {
+        members: arrayRemove(currentProfile.uid),
+        membersLogins: arrayRemove(currentProfile.login)
+      });
 
-      challenges[challengeIndex].members = challenges[challengeIndex].members.filter(
-        member => member !== currentUser.login
+      if (activeChallengeId === challengeId) activeChallengeId = "";
+      renderRating();
+    }
+
+    function getUserStatsFromBooks(userId) {
+      const books = booksCache.filter(b => b.uid === userId);
+      const totalBooks = books.length;
+      const totalPages = books.reduce((sum, b) => sum + Number(b.pages || 0), 0);
+      const avgPages = totalBooks > 0 ? Math.round(totalPages / totalBooks) : 0;
+
+      let goal = 1000;
+      const user = usersCache.find(u => u.uid === userId);
+      if (user && user.goal) goal = user.goal;
+
+      const goalPercent = Math.min(Math.round((totalPages / goal) * 100), 100);
+      return { totalBooks, totalPages, avgPages, goalPercent, goal };
+    }
+
+    function renderBooksOnly() {
+      if (!currentProfile) return;
+
+      const bookList = document.getElementById("bookList");
+      const searchValue = document.getElementById("searchInput").value.trim().toLowerCase();
+
+      bookList.innerHTML = "";
+
+      const filteredBooks = booksCache.filter(book =>
+        book.uid === currentProfile.uid &&
+        (
+          (book.title || "").toLowerCase().includes(searchValue) ||
+          (book.author || "").toLowerCase().includes(searchValue)
+        )
       );
 
-      saveChallenges(challenges);
-
-      if (getActiveChallengeId() === challengeId) {
-        saveActiveChallengeId("");
+      if (filteredBooks.length === 0) {
+        bookList.innerHTML = '<div class="empty">Книги не найдены или список пока пуст.</div>';
+        return;
       }
 
-      renderApp();
+      filteredBooks.forEach(book => {
+        const item = document.createElement("div");
+        item.className = "item";
+        item.innerHTML = `
+          <div class="book-row">
+            <img class="book-cover" src="${book.cover || PLACEHOLDER_COVER}" alt="Обложка книги" />
+            <div>
+              <h4>📖 ${escapeHtml(book.title)}</h4>
+              <div class="small">Автор: ${escapeHtml(book.author || "Не указан")}</div>
+              <div class="small">Страниц: ${book.pages || 0}</div>
+              <div class="book-actions">
+                <button class="danger-btn mini-btn">Удалить</button>
+              </div>
+            </div>
+          </div>
+        `;
+
+        item.querySelector("button").addEventListener("click", () => deleteBook(book.id));
+        bookList.appendChild(item);
+      });
     }
 
     function renderChallenges() {
-      const currentUser = getCurrentUser();
       const challengeList = document.getElementById("challengeList");
-      const activeId = getActiveChallengeId();
-
       challengeList.innerHTML = "";
 
-      const challenges = getChallenges();
-
-      if (challenges.length === 0) {
+      if (challengesCache.length === 0) {
         challengeList.innerHTML = '<div class="empty">Пока турниров нет. Создай первый.</div>';
         return;
       }
 
-      challenges.forEach(challenge => {
-        const isMember = currentUser ? challenge.members.includes(currentUser.login) : false;
-        const isActive = activeId === challenge.id;
+      challengesCache.forEach(challenge => {
+        const isMember = currentProfile ? (challenge.members || []).includes(currentProfile.uid) : false;
+        const isActive = activeChallengeId === challenge.id;
 
         const item = document.createElement("div");
         item.className = "challenge-item";
@@ -1112,7 +972,7 @@
           <h4>${escapeHtml(challenge.name)} ${isActive ? "✅" : ""}</h4>
           <div class="small">Тип: ${challenge.type === "open" ? "Открытый" : "Закрытый"}</div>
           <div class="small">Создатель: ${escapeHtml(challenge.creatorLogin)}</div>
-          <div class="small">Участников: ${challenge.members.length}</div>
+          <div class="small">Участников: ${(challenge.members || []).length}</div>
           ${challenge.type === "closed" ? `<div class="small">Код: ${escapeHtml(challenge.code)}</div>` : ""}
           <div class="challenge-actions"></div>
         `;
@@ -1145,105 +1005,18 @@
       });
     }
 
-    function saveReaderText() {
-      const title = document.getElementById("readerTitleInput").value.trim();
-      const text = document.getElementById("readerTextInput").value.trim();
-
-      if (!text) {
-        alert("Вставь текст для чтения.");
-        return;
-      }
-
-      saveReaderData({
-        title: title || "Мой текст",
-        text
-      });
-
-      renderReader();
-    }
-
-    function loadDemoReaderText() {
-      const demo = {
-        title: "Демо-текст",
-        text: "Это демонстрационный текст для режима чтения.\n\nСюда можно вставить свой рассказ, эссе, заметки по книге или текст из общественного достояния.\n\nТак вы сможете показать жюри, что в приложении есть встроенная читалка."
-      };
-
-      document.getElementById("readerTitleInput").value = demo.title;
-      document.getElementById("readerTextInput").value = demo.text;
-      saveReaderData(demo);
-      renderReader();
-    }
-
-    function clearReaderText() {
-      saveReaderData({ title: "", text: "" });
-      document.getElementById("readerTitleInput").value = "";
-      document.getElementById("readerTextInput").value = "";
-      renderReader();
-    }
-
-    function renderReader() {
-      const data = getReaderData();
-      const titleEl = document.getElementById("readerDisplayTitle");
-      const displayEl = document.getElementById("readerDisplay");
-
-      titleEl.textContent = data.title || "Текст для чтения";
-      displayEl.textContent = data.text || "Пока текста нет.";
-    }
-
-    function renderBooks(user) {
-      const bookList = document.getElementById("bookList");
-      const searchValue = document.getElementById("searchInput").value.trim().toLowerCase();
-
-      bookList.innerHTML = "";
-
-      const filteredBooks = user.books.filter(book =>
-        (book.title || "").toLowerCase().includes(searchValue) ||
-        (book.author || "").toLowerCase().includes(searchValue)
-      );
-
-      if (filteredBooks.length === 0) {
-        bookList.innerHTML = '<div class="empty">Книги не найдены или список пока пуст.</div>';
-        return;
-      }
-
-      filteredBooks.forEach(book => {
-        const item = document.createElement("div");
-        item.className = "item";
-        item.innerHTML = `
-          <div class="book-row">
-            <img class="book-cover" src="${book.cover || PLACEHOLDER_COVER}" alt="Обложка книги" />
-            <div>
-              <h4>📖 ${escapeHtml(book.title)}</h4>
-              <div class="small">Автор: ${escapeHtml(book.author || "Не указан")}</div>
-              <div class="small">Страниц: ${book.pages || 0}</div>
-              <div class="book-actions">
-                <button class="danger-btn mini-btn">Удалить</button>
-              </div>
-            </div>
-          </div>
-        `;
-
-        item.querySelector("button").addEventListener("click", () => deleteBook(book.id));
-        bookList.appendChild(item);
-      });
-    }
-
     function renderRating() {
       const ratingList = document.getElementById("ratingList");
       const ratingTitle = document.getElementById("ratingTitle");
       ratingList.innerHTML = "";
 
-      const users = getUsers();
-      const challenges = getChallenges();
-      const activeId = getActiveChallengeId();
-
-      let usersForRating = users;
+      let usersForRating = usersCache;
       let titleText = "Общий рейтинг по всем пользователям";
 
-      if (activeId) {
-        const challenge = challenges.find(ch => ch.id === activeId);
+      if (activeChallengeId) {
+        const challenge = challengesCache.find(ch => ch.id === activeChallengeId);
         if (challenge) {
-          usersForRating = users.filter(user => challenge.members.includes(user.login));
+          usersForRating = usersCache.filter(user => (challenge.members || []).includes(user.uid));
           titleText = `Рейтинг турнира: ${challenge.name}`;
         }
       }
@@ -1252,7 +1025,7 @@
 
       const rating = usersForRating
         .map(user => {
-          const stats = getUserStats(user);
+          const stats = getUserStatsFromBooks(user.uid);
           return {
             login: user.login,
             className: user.className,
@@ -1290,7 +1063,7 @@
         item.className = extraClass;
         item.innerHTML = `
           <h4>${medal} — ${escapeHtml(user.login)}</h4>
-          <div class="small">Класс: ${escapeHtml(user.className)}</div>
+          <div class="small">Класс: ${escapeHtml(user.className || "Не указано")}</div>
           <div class="small">Книг: ${user.totalBooks}</div>
           <div class="small"><strong>Страниц: ${user.totalPages}</strong></div>
           <div class="small">Статус: ${user.badge}</div>
@@ -1300,53 +1073,42 @@
     }
 
     function renderApp() {
-      const currentUser = getCurrentUser();
-      const goal = getGoal();
-
       const authCard = document.getElementById("authCard");
       const bookCard = document.getElementById("bookCard");
       const challengeCard = document.getElementById("challengeCard");
       const progressCard = document.getElementById("progressCard");
       const booksListCard = document.getElementById("booksListCard");
-      const readerCard = document.getElementById("readerCard");
       const welcomeText = document.getElementById("welcomeText");
 
-      if (currentUser) {
+      if (currentProfile) {
         authCard.classList.add("hidden");
         bookCard.classList.remove("hidden");
         challengeCard.classList.remove("hidden");
         progressCard.classList.remove("hidden");
         booksListCard.classList.remove("hidden");
-        readerCard.classList.remove("hidden");
 
-        const users = getUsers();
-        const freshUser = users.find(user => user.id === currentUser.id) || currentUser;
-        saveCurrentUser(freshUser);
-
-        const stats = getUserStats(freshUser);
+        const stats = getUserStatsFromBooks(currentProfile.uid);
 
         welcomeText.textContent =
-          `Привет, ${freshUser.login}! Класс: ${freshUser.className}. Статус: ${getBadge(stats.totalPages)}`;
+          `Привет, ${currentProfile.login}! Класс: ${currentProfile.className}. Статус: ${getBadge(stats.totalPages)}`;
 
         document.getElementById("totalBooks").textContent = stats.totalBooks;
         document.getElementById("totalPages").textContent = stats.totalPages;
         document.getElementById("avgPages").textContent = stats.avgPages;
-        document.getElementById("goalValueText").textContent = goal;
+        document.getElementById("goalValueText").textContent = stats.goal;
         document.getElementById("progressBar").style.width = stats.goalPercent + "%";
         document.getElementById("goalPercentText").textContent =
-          `Прогресс до цели ${goal} страниц: ${stats.goalPercent}%`;
-        document.getElementById("goalInput").placeholder = `Сейчас: ${goal}`;
+          `Прогресс до цели ${stats.goal} страниц: ${stats.goalPercent}%`;
+        document.getElementById("goalInput").placeholder = `Сейчас: ${stats.goal}`;
 
-        renderBooks(freshUser);
+        renderBooksOnly();
         renderChallenges();
-        renderReader();
       } else {
         authCard.classList.remove("hidden");
         bookCard.classList.add("hidden");
         challengeCard.classList.add("hidden");
         progressCard.classList.add("hidden");
         booksListCard.classList.add("hidden");
-        readerCard.classList.add("hidden");
       }
 
       renderRating();
@@ -1361,28 +1123,43 @@
         .replaceAll("'", "&#039;");
     }
 
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        currentProfile = null;
+        renderApp();
+        return;
+      }
+
+      const snap = await getDoc(doc(db, "users", user.uid));
+      if (snap.exists()) {
+        currentProfile = { uid: user.uid, ...snap.data() };
+      } else {
+        currentProfile = null;
+      }
+
+      renderApp();
+    });
+
+    onSnapshot(collection(db, "users"), (snap) => {
+      usersCache = snap.docs.map(d => ({ uid: d.id, ...d.data() }));
+      if (currentProfile) {
+        const fresh = usersCache.find(u => u.uid === currentProfile.uid);
+        if (fresh) currentProfile = fresh;
+      }
+      renderApp();
+    });
+
+    onSnapshot(collection(db, "books"), (snap) => {
+      booksCache = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      renderApp();
+    });
+
+    onSnapshot(collection(db, "challenges"), (snap) => {
+      challengesCache = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      renderApp();
+    });
+
     renderApp();
   </script>
 </body>
-  <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-app.js";
-  import { getAuth } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-auth.js";
-  import { getFirestore } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-firestore.js";
-
-  const firebaseConfig = {
-  apiKey: "AIzaSyA5iKSOqlOtUldIk-AirBy10tbEpuNL42Y",
-  authDomain: "void-8c7e2.firebaseapp.com",
-  projectId: "void-8c7e2",
-  storageBucket: "void-8c7e2.firebasestorage.app",
-  messagingSenderId: "1013361511979",
-  appId: "1:1013361511979:web:cbd63c78ab5cc49643646e",
-  measurementId: "G-S5P9828SQ0"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-
-  console.log("Firebase подключен ✅");
-</script>
 </html>
